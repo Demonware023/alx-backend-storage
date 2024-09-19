@@ -22,10 +22,12 @@ def count_calls(method: Callable) -> Callable:
     def wrapper(self, *args, **kwargs):
         """
         Wrapper function that increments the call count in Redis
-        for the given method.
+        for the given method using its qualified name.
         """
-        # Increment the call count using the method's __qualname__ as the key
-        key = method.__qualname__
+        # Use the method's __qualname__ to create a Redis key
+        key = f"count:{method.__qualname__}"
+        
+        # Increment the count in Redis
         self._redis.incr(key)
         
         # Call the original method
@@ -40,7 +42,7 @@ class Cache:
     """
     def __init__(self):
         """
-        Initialize Redis client and flush database.
+        Initialize Redis client and flush the database.
         """
         self._redis = redis.Redis()
         self._redis.flushdb()
