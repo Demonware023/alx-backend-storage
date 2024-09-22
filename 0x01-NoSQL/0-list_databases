@@ -1,5 +1,9 @@
-#!/bin/bash
-// Script to list all MongoDB databases
+// Start MongoDB service
+sudo service mongod start
 
-// Run the MongoDB shell command to list databases
-mongo --quiet --eval "db.adminCommand('listDatabases')"
+// List all databases
+echo "Listing all databases:"
+mongo --eval "db.adminCommand('listDatabases')" | grep -iE "name|sizeOnDisk"
+
+// Stop MongoDB service
+sudo service mongod stop
