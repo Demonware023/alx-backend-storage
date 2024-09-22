@@ -1,2 +1,5 @@
-// List all databases
-show dbs
+#!/bin/bash
+// Script to list all MongoDB databases
+
+// Run the MongoDB shell command to list databases
+mongo --quiet --eval "db.adminCommand('listDatabases')"
