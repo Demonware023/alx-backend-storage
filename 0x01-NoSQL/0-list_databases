@@ -2,8 +2,7 @@
 sudo service mongod start
 
 // List all databases
-echo "Listing all databases:"
-mongo --eval "db.adminCommand('listDatabases')" | grep -iE "name|sizeOnDisk"
+show dbs
 
 // Stop MongoDB service
 sudo service mongod stop
